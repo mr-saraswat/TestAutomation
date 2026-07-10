@@ -28,8 +28,8 @@ public class driverFactory {
     }
     public static WebDriver getDriver()
     {
-        initDriver();
-        return driver;
+
+        return initDriver();
     }
     public static void quitDriver(){
         if(driver!= null)
