@@ -14,17 +14,26 @@ public class driverFactory {
     public static WebDriver initDriver()
     {
         String browser = ConfigReader.getProperty("browser");
-        if(browser.equals("chrome") || browser.equals("null"))
+
+        if(browser == null || browser.trim().isEmpty())
         {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
+            throw new RuntimeException("Warning : Please add browser name in config file " +
+                    "please switch to chrome or any other browser..");
         }
-        if(browser.equals("safari"))
-        {
-            driver = new SafariDriver();
-            driver.manage().window().maximize();
+        switch (browser.trim().toLowerCase()) {
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+            case "safari":
+                driver = new SafariDriver();
+                break;
+            default:
+                throw new RuntimeException("Unsupported Browser");
         }
+        driver.manage().window().maximize();
+
         return  driver;
+
     }
     public static WebDriver getDriver()
     {
