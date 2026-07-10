@@ -3,6 +3,7 @@ package base;
 import config.ConfigReader;
 import org.openqa.selenium.WebDriver;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 
@@ -20,7 +21,7 @@ public class baseTest {
         driver.get(ConfigReader.getProperty("url"));
     }
 
-@AfterTest
+@AfterMethod
 public void closeBrowser(){
         driverFactory.quitDriver();
     }
