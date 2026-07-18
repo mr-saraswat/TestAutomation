@@ -8,7 +8,7 @@
 
         <classes>
 
-            <class name="tests.testLogin"/>
+            <class name="tests.LoginTest"/>
 
         </classes>
 
