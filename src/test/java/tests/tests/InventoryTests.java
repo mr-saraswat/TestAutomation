@@ -99,6 +99,4 @@ public class InventoryTests extends BaseTest {
 
     }
 
-
-
 }

@@ -22,6 +22,7 @@ public class InventoryPage extends BasePage{
     protected String addToCartbtn = "//div[text()='%s']/ancestor::div[@class='inventory_item']//button";
     protected String removeFromCartbtn = "//div[text()='%s']/ancestor::div[@class='inventory_item']//button";
     protected By filterBtn = By.className("product_sort_container");
+    protected By itemsAddedtoCart = By.xpath("//button[text()='Remove']/ancestor::div[@class='inventory_item']");
 
     public InventoryPage() {
         super();
@@ -82,12 +83,24 @@ public class InventoryPage extends BasePage{
      By addProduct = By.xpath(productXpath);
      click(addProduct);
      }
-
+    public CartPage navigateToCart(){
+        click(shoppingCartBadge);
+    return new CartPage();
+    }
      public String cartCount(){
         return getElement(shoppingCartBadge).getText();
      }
 
+    public List<ProductDetails> itemsAddedToCart(){
+        List<WebElement> inventoryItems = getElements(itemsAddedtoCart);
+        return inventoryItems.stream().map(card->
+                new ProductDetails(card.findElement(inventoryItemName).getText().trim(),
+                        card.findElement(inventoryItemDesc).getText().trim(),
+                        Double.parseDouble(card.findElement(inventoryItemPrice).getText().
+                                replace("$","").trim()))).toList();
 
+
+    }
 
     public record ProductDetails(String name, String desc, Double price){}
 

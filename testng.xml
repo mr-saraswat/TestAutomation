@@ -9,14 +9,19 @@
             <class name="tests.LoginTest"/>
         </classes>
     </test>
-    -->
+
     <test name="Inventory Tests">
         <classes>
             <class name="tests.InventoryTests">
-                <methods><include name="resetPage"/></methods>
             </class>
         </classes>
     </test>
+-->
 
-
+    <test name="Cart Tests">
+        <classes>
+            <class name="tests.CartPageTests">
+            </class>
+        </classes>
+    </test>
 </suite>

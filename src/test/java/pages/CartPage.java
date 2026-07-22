@@ -14,21 +14,36 @@ public class CartPage extends BasePage
     protected By aboutBtn= By.xpath("//a[text()='About']");
     protected By resetPageBtn= By.xpath("//a[text()='Reset App State']");
     protected By shoppingCartBadge = By.xpath("//span[@class='shopping_cart_badge']");
-    protected By cartItemContainer = By.className("inventory_item");
+    protected By cartItemContainer = By.className("cart_item");
     protected By cartItemQty = By.className("cart_quantity");
     protected By cartItemName = By.className("inventory_item_name");
     protected By cartItemDesc = By.className("inventory_item_desc");
     protected By cartItemPrice = By.className("inventory_item_price");
+    protected By pageTitle = By.className("title");
+    protected By continueShopping = By.id("continue-shopping");
 
 
+
+    public CartPage()
+    {
+        super();
+    }
+    public String getPageTitle()
+    {
+        return  wait.until(ExpectedConditions.visibilityOfElementLocated(pageTitle))
+            .getText()
+            .trim();
+    }
     public Integer cartCount(){
         return Integer.parseInt(getElement(shoppingCartBadge).getText());
     }
 
-    public void returnToInventory()
+    public InventoryPage returnToInventory()
     {
-    click(By.id("continue-shopping"));
+    click(continueShopping);
+    return new InventoryPage();
     }
+
     public String getLivePageTitleText() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(headerTitleLocator))
             .getText()
@@ -47,7 +62,6 @@ public class CartPage extends BasePage
         click(pageOptions);
         click(resetPageBtn);
     }
-
 
     public record ProductDetails(Integer quantity , String name, String desc, Double price){}
 
